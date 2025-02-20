@@ -8,6 +8,7 @@ public class Main{
         
         boolean running = true;
         while (running){
+            System.out.println(browser.getSize());
             System.out.println("\nBrowser Navigation System");
             System.out.println("1. Visit Website");
             System.out.println("2. Go Back");

@@ -7,6 +7,10 @@ public class BrowserNavigation {
     private BrowserQueue<String> history;
     private String currentPage;
 
+    public int getSize(){
+        return history.size();
+    }
+
     public BrowserNavigation(int historyCapacity){
         backStack = new BrowserStack<>();
         forwardStack =  new BrowserStack<>();
@@ -26,12 +30,11 @@ public class BrowserNavigation {
     }
 
     public String goBack(){
-        if(forwardStack.isEmpty()){
+        if(backStack.isEmpty()){
             return "No previous page available";
         }
         forwardStack.push(currentPage);
         currentPage = backStack.pop();
-
         return "now at " + currentPage;
     }
 
@@ -59,6 +62,9 @@ public class BrowserNavigation {
 
     public String clearHistory(){
         history = new BrowserQueue<>(10);
+        backStack = new BrowserStack<>();
+        forwardStack =  new BrowserStack<>();
+        currentPage = null;
         return "Browser history cleared.";
     }
 
