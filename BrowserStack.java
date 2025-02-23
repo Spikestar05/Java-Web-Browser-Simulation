@@ -1,6 +1,4 @@
-import java.util.Iterator;
-
-public class BrowserStack<T> implements Iterable<T>{
+public class BrowserStack<T>{
     private BrowserLinkedList<T> stack;
 
     public BrowserStack(){
@@ -27,8 +25,7 @@ public class BrowserStack<T> implements Iterable<T>{
         return stack.size();
     }
 
-    @Override
-    public Iterator<T> iterator(){
-        return stack.iterator();
+    public StackIterator<T> getStackIterator(){
+        return stack.getStackIterator();
     }
 }

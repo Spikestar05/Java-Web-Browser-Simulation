@@ -1,14 +1,12 @@
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class StackIterator<T> implements Iterator<T> {
+public class StackIterator<T>{
     private BrowserLinkedList<T>.Node current;
 
     public StackIterator(BrowserLinkedList<T> stack){
-        this.current = stack.getHead();
+        this.current = stack.getTail();
     }
 
-    @Override
     public boolean hasNext(){
         if(current != null){
             return true;
@@ -17,13 +15,12 @@ public class StackIterator<T> implements Iterator<T> {
         }
     }
 
-    @Override
     public T next(){
         if(!hasNext()){
             throw new NoSuchElementException();
         }
         T data = current.data;
-        current = current.next;
+        current = current.prev;
         return data;
     }
 }

@@ -72,16 +72,22 @@ public class BrowserNavigation {
 
     public String closeBrowser(){
         try (PrintWriter writer = new PrintWriter(new FileWriter("session_data.txt"))){
-            writer.println(currentPage);
-            for(String url : backStack){
-                writer.println("B:" + url);
+            writer.println("C:" + currentPage);
+            
+            StackIterator<String> backIterator = backStack.getStackIterator();
+            while(backIterator.hasNext()){
+                writer.println("B:" + backIterator.next());
             }
-            for(String url : forwardStack){
-                writer.println("F:" + url);
+
+            StackIterator<String> frontIterator = forwardStack.getStackIterator();
+            while(frontIterator.hasNext()){
+                writer.println("F:" + frontIterator.next());
             }
-            for(String url : history){
+    
+            for (String url : history){
                 writer.println("H:" + url);
-            }
+            }    
+
             return "Broser session saved to session_data.txt.";
         }catch(IOException e){
             return "Error saving session.";
@@ -99,7 +105,9 @@ public class BrowserNavigation {
             forwardStack = new BrowserStack<>();
             history = new BrowserQueue<>(10);
 
-            BrowserStack<String> tempStack = new BrowserStack<>();
+            BrowserStack<String> tempForward = new BrowserStack<>();
+            BrowserStack<String> tempBack = new BrowserStack<>();
+            BrowserStack<String> tempHistory = new BrowserStack<>();
 
             String line;
             if((line = reader.readLine()) != null){ 
@@ -107,21 +115,27 @@ public class BrowserNavigation {
             }
 
             while ((line = reader.readLine()) != null){
-                if(line.startsWith("B:")){
-                    backStack.push(line.substring(2));
-                }
-                if(line.startsWith("F:")){
-                    forwardStack.push(line.substring(2));
-                }
-                if(line.startsWith("H:")){
-                    tempStack.push(line.substring(2));
+                if(line.startsWith("C:")){
+                    currentPage = line.substring(2);
+                }else if(line.startsWith("B:")){
+                    tempBack.push(line.substring(2));
+                }else if(line.startsWith("F:")){
+                    tempForward.push(line.substring(2));
+                }else if(line.startsWith("H:")){
+                    tempHistory.push(line.substring(2));
                 }
             }
 
-            while (!tempStack.isEmpty()) {
-                history.enqueue(tempStack.pop());
+            while (!tempForward.isEmpty()) {
+                forwardStack.push(tempForward.pop());
             }
-            return "Previous session restored.";
+            while (!tempBack.isEmpty()) {
+                backStack.push(tempBack.pop());
+            }
+            while (!tempHistory.isEmpty()) {
+                history.enqueue(tempHistory.pop());
+            }
+            return "Previous session restored, now at: " + currentPage;
         }catch (IOException e){
             return "Error restoring session.";
         }

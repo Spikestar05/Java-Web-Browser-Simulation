@@ -1,7 +1,6 @@
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class BrowserLinkedList<T> implements Iterable<T> {
+public class BrowserLinkedList<T>{
     class Node{
         T data;
         Node next, prev;
@@ -72,30 +71,11 @@ public class BrowserLinkedList<T> implements Iterable<T> {
         return head;
     }
 
-    @Override
-    public Iterator<T> iterator(){
-        return new Iterator<T>(){
-            private Node current = head;
-
-            @Override
-            public boolean hasNext(){
-                if(current != null){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-
-            @Override
-            public T next(){
-                if(!hasNext()){
-                    throw new NoSuchElementException();
-                }
-
-                T data = current.data;
-                current = current.next;
-                return data;
-            }
-        };
+    public Node getTail(){
+        return tail;
+    }
+    
+    public StackIterator<T> getStackIterator(){
+        return new StackIterator<>(this);
     }
 }
