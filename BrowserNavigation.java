@@ -26,9 +26,6 @@ public class BrowserNavigation {
     }
 
     public String goBack(){
-        System.out.println("Forward stack is T/F: ");
-        System.out.println(forwardStack.size());
-        System.out.println("\n");
         if(backStack.size() <= 0){
             return "No previous page available";
         }
@@ -38,9 +35,6 @@ public class BrowserNavigation {
     }
 
     public String goForward(){
-        System.out.println("Forward stack is T/F: ");
-        System.out.println(forwardStack.size());
-        System.out.println("\n");
         if(forwardStack.size() <= 0){
             return "No forward page available";
         }
