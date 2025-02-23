@@ -104,11 +104,6 @@ public class BrowserNavigation {
             BrowserStack<String> tempHistory = new BrowserStack<>();
 
             String line;
-            /*
-            if((line = reader.readLine()) != null){ 
-                currentPage = line;
-            }
-            */
             while ((line = reader.readLine()) != null){
                 if(line.startsWith("C:")){
                     currentPage = line.substring(2);
