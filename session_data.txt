@@ -1,6 +1,6 @@
-C:b
+C:c
+B:b
 B:a
-F:c
 H:c
 H:b
 H:a

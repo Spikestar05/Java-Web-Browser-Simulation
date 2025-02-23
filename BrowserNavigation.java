@@ -60,17 +60,14 @@ public class BrowserNavigation {
         }
     }
     
-    public String showHistory(){
+    public void showHistory(){
         if(history.isEmpty()){
             throw new EmptyStackException();
         }
-        StringBuilder sb = new StringBuilder("Browser History:\n");
-
-        for(int i = 0; i < history.size(); i++){
-            sb.append((history.elementAt(i))).append("\n");
+        
+        for (int i = history.size() - 1; i >= 0; i--){
+            System.out.println(history.elementAt(i));
         }
-
-        return sb.toString();
     }
 
     public String clearHistory(){
@@ -95,9 +92,9 @@ public class BrowserNavigation {
                 writer.println("F:" + frontIterator.next());
             }
     
-            for (int i = 0; i < history.size(); i++){
+            for (int i = history.size() - 1; i >= 0; i--){
                 writer.println("H:" + (history.elementAt(i)));
-            }    
+            }
 
             return "Broser session saved to session_data.txt.";
         }catch(IOException e){
@@ -132,7 +129,7 @@ public class BrowserNavigation {
                     tempHistory.push(line.substring(2));
                 }
             }
-
+            
             while (!tempForward.isEmpty()) {
                 forwardStack.push(tempForward.pop());
             }

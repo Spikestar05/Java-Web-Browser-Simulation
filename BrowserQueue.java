@@ -1,4 +1,6 @@
-public class BrowserQueue<T>{
+import java.util.Iterator;
+
+public class BrowserQueue<T> implements Iterable<T>{
     private BrowserArrayList<T> queue;
 
     public BrowserQueue(int capacity){
@@ -23,5 +25,9 @@ public class BrowserQueue<T>{
 
     public int size(){
         return queue.size();
+    }
+
+    public Iterator<T> iterator(){
+        return queue.iterator();
     }
 }

@@ -1,6 +1,7 @@
 import java.util.NoSuchElementException;
+import java.util.Iterator;
 
-public class BrowserArrayList<T>{
+public class BrowserArrayList<T> implements Iterable<T>{
     private T[] array;
     private int front, rear, size, capacity;
 
@@ -14,7 +15,7 @@ public class BrowserArrayList<T>{
     }
 
     public T getElementAt(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || index >= size){
             throw new IndexOutOfBoundsException("Index out of bounds");
         }
         return array[(front + index) % capacity];
@@ -24,10 +25,7 @@ public class BrowserArrayList<T>{
         if(size == capacity){
             resize();
         }
-        for(int i = size; i > 0; i--){
-            array[i] = array[i - 1];
-        }
-        array[0] = data;
+        array[rear] = data;
         rear = (rear + 1) % capacity;
         size++;
     }
@@ -66,5 +64,33 @@ public class BrowserArrayList<T>{
         front = 0;
         rear = size;
         capacity = newCapacity;
+    }
+
+    public Iterator<T> iterator() {
+        return new ArrayListIterator();
+    }
+
+    private class ArrayListIterator implements Iterator<T> {
+        private int index = front;
+        private int count = 0;
+
+        @Override
+        public boolean hasNext(){
+            if(count < size){
+                return true;
+            } else{
+                return false;
+            }
+        }
+        @Override
+        public T next(){
+            if (!hasNext()){
+                throw new NoSuchElementException();
+            }
+            T data = array[index];
+            index = (index + 1) % capacity;
+            count++;
+            return data;
+        }
     }
 }

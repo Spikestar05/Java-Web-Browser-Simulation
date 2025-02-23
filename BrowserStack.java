@@ -1,3 +1,5 @@
+import java.util.EmptyStackException;
+
 public class BrowserStack<T>{
     private BrowserLinkedList<T> stack;
 
@@ -10,11 +12,17 @@ public class BrowserStack<T>{
     }
 
     public T pop(){
-       return stack.removeLast();
+        if(isEmpty()){
+            throw new EmptyStackException();
+        }
+        return stack.removeLast();
     }
 
     public T peek(){
-       return stack.peekLast();
+        if(isEmpty()){
+            throw new EmptyStackException();
+        }
+        return stack.peekLast();
     }
 
     public boolean isEmpty(){

@@ -5,7 +5,6 @@ public class Main{
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         BrowserNavigation browser = new BrowserNavigation(10);
-        
         boolean running = true;
         while (running){
             System.out.println("\nBrowser Navigation System");
@@ -41,7 +40,7 @@ public class Main{
                         System.out.println(browser.goForward());
                         break;
                     case 4:
-                        System.out.println(browser.showHistory());
+                        browser.showHistory();
                         break;
                     case 5:
                         System.out.println(browser.clearHistory());
