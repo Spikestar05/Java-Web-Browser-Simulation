@@ -5,6 +5,7 @@ public class BrowserArrayList<T> implements Iterable<T>{
     private T[] array;
     private int front, rear, size, capacity;
 
+    @SuppressWarnings("unchecked") 
     public BrowserArrayList(int capacity){
         this.capacity = capacity;
         this.array = (T[]) new Object[capacity];
@@ -48,6 +49,7 @@ public class BrowserArrayList<T> implements Iterable<T>{
         return size;
     }
 
+    @SuppressWarnings("unchecked") 
     public void resize(){
         int newCapacity = capacity*2;
         T[] newArray = (T[]) new Object[newCapacity];
