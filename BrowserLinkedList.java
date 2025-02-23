@@ -18,7 +18,7 @@ public class BrowserLinkedList<T> implements Iterable<T> {
     public BrowserLinkedList(){
         head = null;
         tail = null;
-        size = 1;
+        size = 0;
     }
 
     public void addLast(T data){

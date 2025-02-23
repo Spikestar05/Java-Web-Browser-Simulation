@@ -8,20 +8,24 @@ public class Main{
         
         boolean running = true;
         while (running){
-            System.out.println(browser.getSize());
             System.out.println("\nBrowser Navigation System");
             System.out.println("1. Visit Website");
             System.out.println("2. Go Back");
             System.out.println("3. Go Forward");
             System.out.println("4. Show Browsing History");
             System.out.println("5. Clear Browsing History");
-            System.out.println("6. Close Browser");
+            System.out.println("6. Close Browser (saves session to file and exits)");
             System.out.println("7. Restore Last Session");
             System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
             
+            while(!scanner.hasNextInt()){
+                System.out.println("Invalid input. Please enter a number");
+                scanner.nextLine();
+            }
+
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
             
             try{
                 switch (choice){
@@ -44,6 +48,7 @@ public class Main{
                         break;
                     case 6:
                         System.out.println(browser.closeBrowser());
+                        running = false;
                         break;
                     case 7:
                         System.out.println(browser.restoreLastSession());
@@ -55,7 +60,7 @@ public class Main{
                         System.out.println("Invalid choice. Try again.");
                 }
             } catch (EmptyStackException e){
-                System.out.println("No previous/forward page available.");
+                System.out.println("No history available.");
             }
         }
 

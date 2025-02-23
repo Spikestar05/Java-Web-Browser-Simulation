@@ -7,10 +7,6 @@ public class BrowserNavigation {
     private BrowserQueue<String> history;
     private String currentPage;
 
-    public int getSize(){
-        return history.size();
-    }
-
     public BrowserNavigation(int historyCapacity){
         backStack = new BrowserStack<>();
         forwardStack =  new BrowserStack<>();
@@ -30,7 +26,10 @@ public class BrowserNavigation {
     }
 
     public String goBack(){
-        if(backStack.isEmpty()){
+        System.out.println("Forward stack is T/F: ");
+        System.out.println(forwardStack.size());
+        System.out.println("\n");
+        if(backStack.size() <= 0){
             return "No previous page available";
         }
         forwardStack.push(currentPage);
@@ -39,7 +38,10 @@ public class BrowserNavigation {
     }
 
     public String goForward(){
-        if(forwardStack.isEmpty()){
+        System.out.println("Forward stack is T/F: ");
+        System.out.println(forwardStack.size());
+        System.out.println("\n");
+        if(forwardStack.size() <= 0){
             return "No forward page available";
         }
         backStack.push(currentPage);
@@ -92,17 +94,17 @@ public class BrowserNavigation {
             return "No previous session found.";
         }
 
-        try(BufferedReader reader = new BufferedReader(new FileReader(file))){
+        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
             backStack = new BrowserStack<>();
             forwardStack = new BrowserStack<>();
             history = new BrowserQueue<>(10);
 
-            String line = reader.readLine();
-            if(line != null){
+            String line;
+            if((line = reader.readLine()) != null){ 
                 currentPage = line;
             }
 
-            while (line != null){
+            while ((line = reader.readLine()) != null){
                 if(line.startsWith("B:")){
                     backStack.push(line.substring(2));
                 }
