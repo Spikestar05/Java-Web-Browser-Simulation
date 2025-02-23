@@ -1,4 +1,3 @@
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class BrowserArrayList<T>{
@@ -68,31 +67,4 @@ public class BrowserArrayList<T>{
         rear = size;
         capacity = newCapacity;
     }
-
-    /*
-    @Override
-    public Iterator<T> iterator(){
-        return new Iterator<T>(){
-            private int index = front, count = 0;
-
-            public boolean hasNext(){
-                if(count < size){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-
-            public T next(){
-                if(!hasNext()){
-                    throw new NoSuchElementException();
-                }
-                T data = array[index];
-                index = (index + 1) % capacity;
-                count++;
-                return data;
-            }
-        };
-    }
-        */
 }

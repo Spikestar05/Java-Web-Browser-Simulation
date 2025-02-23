@@ -1,5 +1,3 @@
-import java.util.Iterator;
-
 public class BrowserQueue<T>{
     private BrowserArrayList<T> queue;
 
@@ -26,10 +24,4 @@ public class BrowserQueue<T>{
     public int size(){
         return queue.size();
     }
-
-    /*
-    @Override
-    public Iterator<T> iterator(){
-        return queue.iterator();
-    }*/
 }

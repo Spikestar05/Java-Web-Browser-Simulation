@@ -14,7 +14,7 @@ public class Main{
             System.out.println("3. Go Forward");
             System.out.println("4. Show Browsing History");
             System.out.println("5. Clear Browsing History");
-            System.out.println("6. Close Browser (saves session to file and exits)");
+            System.out.println("6. Close Browser (saves session to file)");
             System.out.println("7. Restore Last Session");
             System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
@@ -48,7 +48,6 @@ public class Main{
                         break;
                     case 6:
                         System.out.println(browser.closeBrowser());
-                        running = false;
                         break;
                     case 7:
                         System.out.println(browser.restoreLastSession());
