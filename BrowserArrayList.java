@@ -17,7 +17,10 @@ public class BrowserArrayList<T> implements Iterable<T>{
         if(size == capacity){
             resize();
         }
-        array[rear] = data;
+        for(int i = size; i > 0; i--){
+            array[i] = array[i - 1];
+        }
+        array[0] = data;
         rear = (rear + 1) % capacity;
         size++;
     }

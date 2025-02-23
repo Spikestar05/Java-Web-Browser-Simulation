@@ -99,6 +99,8 @@ public class BrowserNavigation {
             forwardStack = new BrowserStack<>();
             history = new BrowserQueue<>(10);
 
+            BrowserStack<String> tempStack = new BrowserStack<>();
+
             String line;
             if((line = reader.readLine()) != null){ 
                 currentPage = line;
@@ -112,8 +114,12 @@ public class BrowserNavigation {
                     forwardStack.push(line.substring(2));
                 }
                 if(line.startsWith("H:")){
-                    history.enqueue(line.substring(2));
+                    tempStack.push(line.substring(2));
                 }
+            }
+
+            while (!tempStack.isEmpty()) {
+                history.enqueue(tempStack.pop());
             }
             return "Previous session restored.";
         }catch (IOException e){
