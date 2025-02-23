@@ -1,3 +1,5 @@
+import java.awt.Desktop;
+import java.net.URI;
 import java.io.*;
 import java.util.EmptyStackException;
 
@@ -21,7 +23,8 @@ public class BrowserNavigation {
         
         forwardStack = new BrowserStack<>();
         history.enqueue(url);
-        currentPage = url;    
+        currentPage = url;
+        openWebPage(url);
         return "now at " + currentPage;
     }
 
@@ -31,6 +34,7 @@ public class BrowserNavigation {
         }
         forwardStack.push(currentPage);
         currentPage = backStack.pop();
+        openWebPage(currentPage);
         return "now at " + currentPage;
     }
 
@@ -40,9 +44,22 @@ public class BrowserNavigation {
         }
         backStack.push(currentPage);
         currentPage = forwardStack.pop();
+        openWebPage(currentPage);
         return "now at " + currentPage;
     }
 
+    private void openWebPage(String url) {
+        try {
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                Desktop.getDesktop().browse(new URI(url));
+            } else {
+                System.out.println("Opening web page not supported on this system. URL: " + url);
+            }
+        } catch (Exception e) {
+            System.out.println("Error opening web page: " + e.getMessage());
+        }
+    }
+    
     public String showHistory(){
         if(history.isEmpty()){
             throw new EmptyStackException();
