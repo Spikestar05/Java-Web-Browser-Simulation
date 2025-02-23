@@ -49,8 +49,8 @@ public class BrowserNavigation {
         }
         StringBuilder sb = new StringBuilder("Browser History:\n");
 
-        for(String url : history){
-            sb.append(url).append("\n");
+        for(int i = 0; i < history.size(); i++){
+            sb.append((history.elementAt(i))).append("\n");
         }
 
         return sb.toString();
@@ -78,8 +78,8 @@ public class BrowserNavigation {
                 writer.println("F:" + frontIterator.next());
             }
     
-            for (String url : history){
-                writer.println("H:" + url);
+            for (int i = 0; i < history.size(); i++){
+                writer.println("H:" + (history.elementAt(i)));
             }    
 
             return "Broser session saved to session_data.txt.";
@@ -104,10 +104,11 @@ public class BrowserNavigation {
             BrowserStack<String> tempHistory = new BrowserStack<>();
 
             String line;
+            /*
             if((line = reader.readLine()) != null){ 
                 currentPage = line;
             }
-
+            */
             while ((line = reader.readLine()) != null){
                 if(line.startsWith("C:")){
                     currentPage = line.substring(2);
