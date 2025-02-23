@@ -130,15 +130,16 @@ public class BrowserNavigation {
                 }
             }
             
-            while (!tempForward.isEmpty()) {
+            while (!tempForward.isEmpty()){
                 forwardStack.push(tempForward.pop());
             }
-            while (!tempBack.isEmpty()) {
+            while (!tempBack.isEmpty()){
                 backStack.push(tempBack.pop());
             }
-            while (!tempHistory.isEmpty()) {
+            while (!tempHistory.isEmpty()){
                 history.enqueue(tempHistory.pop());
             }
+            
             return "Previous session restored, now at: " + currentPage;
         }catch (IOException e){
             return "Error restoring session.";
