@@ -4,7 +4,7 @@ import java.util.EmptyStackException;
 public class Main{
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
-        BrowserNavigation browser = new BrowserNavigation(10);
+        BrowserNavigation browser = new BrowserNavigation(10);//Initialize browser with history capacity of 10
         boolean running = true;
         while (running){
             System.out.println("\nBrowser Navigation System");
